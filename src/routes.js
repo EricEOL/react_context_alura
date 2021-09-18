@@ -3,19 +3,31 @@ import Feira from 'pages/Feira';
 import Login from 'pages/Login';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { UserProvider } from 'common/context/User';
+import { CartProvider } from 'common/context/Cart';
 
 function Router() {
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <UserProvider>
+        <UserProvider>
+
+          <Route exact path="/">
             <Login />
-          </UserProvider>
-        </Route>
-        <Route path="/feira" component={Feira} />
+          </Route>
+
+          <CartProvider>
+
+            <Route path="/feira">
+              <Feira />
+            </Route>
+
+          </CartProvider>
+
+        </UserProvider>
+
         <Route path="/carrinho" component={Carrinho} />
+      
       </Switch>
     </BrowserRouter>
   )
