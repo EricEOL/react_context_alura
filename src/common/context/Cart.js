@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 export const CartContext = createContext();
 CartContext.displayName = "Cart";
@@ -6,21 +6,23 @@ CartContext.displayName = "Cart";
 export const CartProvider = ({ children }) => {
 
   const [cart, setCart] = useState([]);
+  const [productsAmount, setProductsAmount] = useState(0);
 
   return (
-    <CartContext.Provider value={{ cart, setCart }}>
+    <CartContext.Provider
+      value={{ cart, setCart, productsAmount, setProductsAmount }}
+    >
       {children}
     </CartContext.Provider>
   )
 }
 
 export const useCartContext = () => {
-  const { cart, setCart } = useContext(CartContext);
+  const { cart, setCart, productsAmount, setProductsAmount } = useContext(CartContext);
 
   function changeAmount(id, amount) {
     return cart.map(cartItem => {
       if (cartItem.id === id) {
-        if(cartItem.amount === 0 && amount === -1) return cartItem;
         cartItem.amount += amount;
         return cartItem;
       }
@@ -48,14 +50,23 @@ export const useCartContext = () => {
 
     if (product?.amount === undefined) return;
 
-    if (product.amount === 1) setCart(oldCart => oldCart.filter(cartItem => cartItem.id !== product.id));
+    if (product.amount === 1) return setCart(oldCart => oldCart.filter(cartItem => cartItem.id !== product.id));
 
     setCart(changeAmount(product.id, -1));
   }
 
+  useEffect(() => {
+    const newAmountOfProductsInCart = cart.reduce((counter, product) => {
+      return counter + product.amount;
+    }, 0);
+
+    setProductsAmount(newAmountOfProductsInCart);
+  }, [cart]);
+
   return {
     cart,
     addProduct,
-    removeProduct
+    removeProduct,
+    productsAmount
   }
 }
