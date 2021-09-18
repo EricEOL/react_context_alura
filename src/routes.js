@@ -22,14 +22,11 @@ function Router() {
               <Feira />
             </Route>
 
+            <Route path="/carrinho" component={Carrinho} />
           </CartProvider>
-
         </UserProvider>
-
-        <Route path="/carrinho" component={Carrinho} />
-      
       </Switch>
-    </BrowserRouter>
+    </BrowserRouter >
   )
 }
 
