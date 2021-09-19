@@ -61,7 +61,7 @@ export const useCartContext = () => {
     }, 0);
 
     setProductsAmount(newAmountOfProductsInCart);
-  }, [cart]);
+  }, [cart, setProductsAmount]);
 
   return {
     cart,

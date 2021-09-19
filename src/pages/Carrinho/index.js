@@ -1,8 +1,9 @@
 import { Button, Snackbar, InputLabel } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import { useCartContext } from 'common/context/Cart';
+import { PaymentContext } from 'common/context/Payment';
 import Produto from 'components/Produto';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useHistory } from 'react-router';
 import { Container, Voltar, TotalContainer, PagamentoContainer} from './styles';
 
@@ -10,6 +11,7 @@ function Carrinho() {
   const history = useHistory();
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const { cart } = useCartContext();
+  const { paymentTypes, paymentType, setPaymentType } = useContext(PaymentContext)
   return (
     <Container>
       <Voltar 
