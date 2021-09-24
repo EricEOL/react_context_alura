@@ -18,11 +18,10 @@ function Router() {
           </Route>
 
           <CartProvider>
-
+          <PaymentProvider>
             <Route path="/feira">
               <Feira />
             </Route>
-            <PaymentProvider>
               <Route path="/carrinho" component={Carrinho} />
             </PaymentProvider>
           </CartProvider>
