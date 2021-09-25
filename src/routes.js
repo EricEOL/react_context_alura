@@ -5,29 +5,33 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { UserProvider } from 'common/context/User';
 import { CartProvider } from 'common/context/Cart';
 import { PaymentProvider } from 'common/context/Payment';
+import { ThemeContextProvider } from 'common/context/Theme';
 
 function Router() {
 
   return (
+
     <BrowserRouter>
       <Switch>
-        <UserProvider>
+        <ThemeContextProvider>
+            <UserProvider>
+              <Route exact path="/">
+                <Login />
+              </Route>
 
-          <Route exact path="/">
-            <Login />
-          </Route>
-
-          <CartProvider>
-          <PaymentProvider>
-            <Route path="/feira">
-              <Feira />
-            </Route>
-              <Route path="/carrinho" component={Carrinho} />
-            </PaymentProvider>
-          </CartProvider>
-        </UserProvider>
+              <CartProvider>
+                <PaymentProvider>
+                  <Route path="/feira">
+                    <Feira />
+                  </Route>
+                  <Route path="/carrinho" component={Carrinho} />
+                </PaymentProvider>
+              </CartProvider>
+            </UserProvider>
+        </ThemeContextProvider>
       </Switch>
     </BrowserRouter >
+
   )
 }
 
