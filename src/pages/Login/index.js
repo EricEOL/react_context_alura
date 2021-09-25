@@ -10,7 +10,7 @@ import {
   InputLabel,
   InputAdornment
 } from '@material-ui/core';
-
+import { Header } from '../../components/Header';
 import { useHistory } from 'react-router-dom';
 import { UserContext } from 'common/context/User';
 import { useContext } from 'react';
@@ -21,15 +21,12 @@ function Login() {
 
   const history = useHistory();
   const { name, setName, balance, setBalance } = useContext(UserContext);
-  const { isDarkTheme, setIsDarkTheme } = useThemeContext();
+  const { isDarkTheme } = useThemeContext();
 
-  function handleChangeTheme() {
-    if(isDarkTheme) setIsDarkTheme(false);
-    if(!isDarkTheme) setIsDarkTheme(true);
-  }
 
   return (
     <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
+      <Header />
       <Container>
         <Titulo>Insira o seu nome</Titulo>
         <InputContainer>
@@ -65,7 +62,6 @@ function Login() {
         >
           Avançar
         </Button>
-        <button onClick={handleChangeTheme}>DARK | LIGHT</button>
       </Container>
     </ThemeProvider>
   )

@@ -15,6 +15,7 @@ export const Container = styled.div`
 export const Titulo = styled.h2`
   margin-bottom: 20px;
   margin-top: 50px;
+  color: ${props => props.theme.text};
 `;
 
 export const InputContainer = styled(FormControl)`

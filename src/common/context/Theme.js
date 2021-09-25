@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { darkTheme } from "themes";
 
 export const ThemeContext = createContext();
 ThemeContext.displayName = "Theme";
@@ -6,6 +7,11 @@ ThemeContext.displayName = "Theme";
 export const ThemeContextProvider = ({ children }) => {
 
   const [isDarkTheme, setIsDarkTheme] = useState(true);
+
+  useEffect(() => {
+    const theme = localStorage.getItem('theme');
+    console.log(theme);
+  }, [darkTheme, setIsDarkTheme])
 
   return (
     <ThemeContext.Provider value={{ isDarkTheme, setIsDarkTheme }}>
