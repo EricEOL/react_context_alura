@@ -25,7 +25,7 @@ function Login() {
 
 
   return (
-    <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
+    <ThemeProvider theme={isDarkTheme === 'dark' ? darkTheme : lightTheme}>
       <Header />
       <Container>
         <Titulo>Insira o seu nome</Titulo>
