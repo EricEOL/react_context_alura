@@ -21,11 +21,9 @@ function Login() {
 
   const history = useHistory();
   const { name, setName, balance, setBalance } = useContext(UserContext);
-  const { isDarkTheme } = useThemeContext();
-
 
   return (
-    <ThemeProvider theme={isDarkTheme === 'dark' ? darkTheme : lightTheme}>
+    <>
       <Header />
       <Container>
         <Titulo>Insira o seu nome</Titulo>
@@ -63,7 +61,7 @@ function Login() {
           Avançar
         </Button>
       </Container>
-    </ThemeProvider>
+    </>
   )
 };
 

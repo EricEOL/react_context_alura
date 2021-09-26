@@ -1,4 +1,6 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
+import { ThemeProvider } from 'styled-components';
+import { darkTheme, lightTheme } from '../../themes';
 
 export const ThemeContext = createContext();
 ThemeContext.displayName = "Theme";
@@ -8,31 +10,18 @@ export const ThemeContextProvider = ({ children }) => {
   const [isDarkTheme, setIsDarkTheme] = useState(() => {
     const theme = localStorage.getItem('theme');
 
-    if(theme === 'dark') {
+    if (theme === 'dark') {
       return 'dark';
     } else {
       return 'light';
     }
   });
 
-/*   useEffect(() => {
-
-    const theme = localStorage.getItem('theme');
-
-    if(!theme) {
-      localStorage.setItem('theme', 'light');
-    }
-
-    if(theme === 'dark') {
-      setIsDarkTheme('dark');
-    } else {
-      setIsDarkTheme('light');
-    }
-  }, [setIsDarkTheme]) */
-
   return (
     <ThemeContext.Provider value={{ isDarkTheme, setIsDarkTheme }}>
-      {children}
+      <ThemeProvider theme={isDarkTheme === 'dark' ? darkTheme : lightTheme}>
+        {children}
+      </ThemeProvider>
     </ThemeContext.Provider>
   )
 }
